@@ -1,5 +1,6 @@
 {
   "name": "in.orbit-web",
+  "description": "in.orbit-api is a Rest API for managing weekly goals.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,10 +13,7 @@
     "commit": "npx --no-install lint-staged && git-cz"
   },
   "lint-staged": {
-    "{src,apps,libs,test}/**/*.{ts,tsx}": [
-      "yarn format",
-      "yarn lint"
-    ]
+    "{src,apps,libs,test}/**/*.{ts,tsx}": ["yarn format", "yarn lint"]
   },
   "config": {
     "commitizen": {

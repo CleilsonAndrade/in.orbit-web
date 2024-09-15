@@ -1,7 +1,9 @@
-import './App.css'
-
 export function App() {
-  return <h1>hello</h1>
+  return (
+    <div>
+      <h1 className="text-zinc-50">teste</h1>
+    </div>
+  )
 }
 
 export default App
