@@ -12,7 +12,7 @@ type SummaryResponse = {
 }
 
 export async function getSummary(): Promise<SummaryResponse> {
-  const response = await fetch('')
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL_API}/summary`)
   const data = await response.json()
   return data.summary
 }
