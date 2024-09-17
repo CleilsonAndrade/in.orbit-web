@@ -68,7 +68,7 @@ in.orbit-web é o cliente web da API in.orbit-api, com fim de realizar o gerenci
   * #FFFFFF<br>
 
 - <span id="fontes">Fontes<br></span>
-   Arial, sans-serif
+  * Arial, sans-serif
 
 - <span id="ícones">Ícones<br></span>
   * Lucid-React
