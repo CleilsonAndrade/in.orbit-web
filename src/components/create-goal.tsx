@@ -22,10 +22,17 @@ const createGoalForm = z.object({
   desiredWeeklyFrequency: z.coerce.number().min(1).max(7),
 })
 
+type CreateGoalForm = z.infer<typeof createGoalForm>
+
 export function CreateGoal() {
-  const { register, control } = useForm({
-    resolver: zodResolver(createGoalForm),
-  })
+  const { register, control, handleSubmit, formState } =
+    useForm<CreateGoalForm>({
+      resolver: zodResolver(createGoalForm),
+    })
+
+  async function handleCreateGoal(data: CreateGoalForm) {
+    console.log(data)
+  }
 
   return (
     <DialogContent>
@@ -44,7 +51,10 @@ export function CreateGoal() {
           </DialogDescription>
         </div>
 
-        <form className="flex-1 flex flex-col justify-between">
+        <form
+          onSubmit={handleSubmit(handleCreateGoal)}
+          className="flex-1 flex flex-col justify-between"
+        >
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <Label htmlFor="title">Qual a atividade?</Label>
@@ -54,17 +64,24 @@ export function CreateGoal() {
                 placeholder="Praticar exercícios, meditar, etc..."
                 {...register('title')}
               />
+
+              {formState.errors.title && (
+                <p className="text-red-400 text-sm">
+                  {formState.errors.title.message}
+                </p>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="title">Quantas vezes na semana?</Label>
               <Controller
                 control={control}
                 name="desiredWeeklyFrequency"
+                defaultValue={3}
                 render={({ field }) => {
                   return (
                     <RadioGroup
                       onValueChange={field.onChange}
-                      value={field.value}
+                      value={String(field.value)}
                     >
                       <RadioGroupItem value="1">
                         <RadioGroupIndicator />
@@ -96,6 +113,30 @@ export function CreateGoal() {
                           4x na semana
                         </span>
                         <span className="text-lg leading-none">😜</span>
+                      </RadioGroupItem>
+
+                      <RadioGroupItem value="5">
+                        <RadioGroupIndicator />
+                        <span className="text-zinc-300 text-sm font-medium leading-none">
+                          5x na semana
+                        </span>
+                        <span className="text-lg leading-none">🤨</span>
+                      </RadioGroupItem>
+
+                      <RadioGroupItem value="6">
+                        <RadioGroupIndicator />
+                        <span className="text-zinc-300 text-sm font-medium leading-none">
+                          6x na semana
+                        </span>
+                        <span className="text-lg leading-none">🤯</span>
+                      </RadioGroupItem>
+
+                      <RadioGroupItem value="7">
+                        <RadioGroupIndicator />
+                        <span className="text-zinc-300 text-sm font-medium leading-none">
+                          Todos dias da semana
+                        </span>
+                        <span className="text-lg leading-none">🔥</span>
                       </RadioGroupItem>
                     </RadioGroup>
                   )
